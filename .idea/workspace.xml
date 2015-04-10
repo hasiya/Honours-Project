@@ -1513,7 +1513,11 @@
       <created>1428709867062</created>
       <updated>1428709867062</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Committing the images">
+      <created>1428710115210</created>
+      <updated>1428710115210</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1538,9 +1542,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32702702" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32702702" sideWeight="0.4968017" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17673522" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1589,7 +1593,8 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Have the main menu.&#10;Currently working on the stock filling.&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Have the main menu.&#10;Currently working on the stock filling.&#10;" />
+    <MESSAGE value="Committing the images" />
+    <option name="LAST_COMMIT_MESSAGE" value="Committing the images" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
