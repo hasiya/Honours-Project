@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">Stock_App_Android</string>
     <string name="title_activity_main">MainActivity</string>
+    <!--Main Menu-->
+    <string name="main_stock_filling">Stock Filling</string>
+    <string name="main_product_maintenance">Product Maintenance </string>
+    <string name="main_ordering">Ordering</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_product_list">ProductList</string>
+    <string name="title_activity_product_fill">Product_fill</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_product_tier_tabs">product_tier_tabs</string>
+    <string name="title_activity_product_tier_slider">product_tier_slider</string>
 </resources>

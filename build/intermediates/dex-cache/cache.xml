@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Rajith Hasith\OneDrive\Honours Project\Stock_App_Android\app\libs\android-ddp-0.0.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="018bf8eeaf440ca95e0c56838ddb68a30b734da9">
-        <dex dex="C:\Users\Rajith Hasith\OneDrive\Honours Project\Stock_App_Android\app\build\intermediates\pre-dexed\debug\android-ddp-0.0.1-0929bd6ba46fed581c6283c3e499e62b0a8ae0fc.jar" />
-    </item>
-    <item
         jar="C:\Users\Rajith Hasith\OneDrive\Honours Project\Stock_App_Android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -30,18 +23,18 @@
         <dex dex="C:\Users\Rajith Hasith\OneDrive\Honours Project\Stock_App_Android\app\build\intermediates\pre-dexed\debug\classes-c38e2c594ee5417bf026cda8b4b7407ebe357ec9.jar" />
     </item>
     <item
-        jar="C:\Users\Rajith Hasith\OneDrive\Honours Project\Stock_App_Android\app\libs\android-ddp-0.0.1-bundle.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="27aabc37dcd2b22dbe4f12cc32f6e0d32fa407ca">
-        <dex dex="C:\Users\Rajith Hasith\OneDrive\Honours Project\Stock_App_Android\app\build\intermediates\pre-dexed\debug\android-ddp-0.0.1-bundle-974bc2e3c4cca7a7a230bdace24e90640dea5d3f.jar" />
-    </item>
-    <item
         jar="C:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
         <dex dex="C:\Users\Rajith Hasith\OneDrive\Honours Project\Stock_App_Android\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-99c1ccd53a7fa88549c32ac544faa9e96cd17557.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rajith Hasith\OneDrive\Honours Project\Stock_App_Android\app\libs\android-ddp-0.0.1-bundle.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="27aabc37dcd2b22dbe4f12cc32f6e0d32fa407ca">
+        <dex dex="C:\Users\Rajith Hasith\OneDrive\Honours Project\Stock_App_Android\app\build\intermediates\pre-dexed\debug\android-ddp-0.0.1-bundle-974bc2e3c4cca7a7a230bdace24e90640dea5d3f.jar" />
     </item>
 
 </items>

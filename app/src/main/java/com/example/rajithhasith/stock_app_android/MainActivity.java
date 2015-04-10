@@ -1,5 +1,6 @@
 package com.example.rajithhasith.stock_app_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -7,13 +8,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.*;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import im.delight.android.ddp.Meteor;
@@ -22,13 +26,29 @@ import im.delight.android.ddp.MeteorCallback;
 
 public class MainActivity extends ActionBarActivity implements MeteorCallback {
 
-    private Meteor mMeteor;
+    Meteor mMeteor;
+
+    Product product;
+    ArrayList productList = new ArrayList();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
         mMeteor.setCallback(this);
+
+
+        Button btn_StockFilling = (Button)findViewById(R.id.id_stock_filling);
+        btn_StockFilling.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, ProductList.class);
+                i.putParcelableArrayListExtra("ProductList", productList);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -67,47 +87,9 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
         //System.out.println("Connected");
 
         // subscribe to data from the server
-        String subscriptionId = mMeteor.subscribe("products");
+        mMeteor.subscribe("products");
+        mMeteor.subscribe("barcodes");
 
-        // unsubscribe from data again (usually done later or not at all)
-        //mMeteor.unsubscribe(subscriptionId);
-
-        // insert data into a collection
-        /*Map<String, Object> insertValues = new HashMap<String, Object>();
-        //insertValues.put("_id", "bla");
-        insertValues.put("name", "from android");
-        insertValues.put("size", "nice");
-        insertValues.put("price", "nice");
-        mMeteor.insert("products", insertValues);*/
-
-        /*JSONObject json = new JSONObject();
-        try {
-            json.put("name","boola");
-            json.put("size","200");
-            json.put("price","2.00");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
-
-
-        //String name = "Boola";
-        String [] Data;
-        // Data = new String[]{"azsxdfgTEST", "600", "2.00"};
-
-        // update data in a collection
-       /* Map<String, Object> updateQuery = new HashMap<String, Object>();
-        updateQuery.put("_id", "bla");
-        Map<String, Object> updateValues = new HashMap<String, Object>();
-        insertValues.put("_id", "my-key");
-        insertValues.put("name", 5);
-        mMeteor.update("products", updateQuery, updateValues);*/
-
-        // remove data from a collection
-        //mMeteor.remove("my-collection", "my-key");
-
-        // call an arbitrary method
-//        mMeteor.call("addProduct",Data);
     }
 
     @Override
@@ -120,27 +102,45 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
         System.out.println("Data added to <"+collectionName+"> in document <"+documentID+">");
         System.out.println("    Added: "+fieldsJson);
 
-       /* View linearLayout =  findViewById(R.id.info);
+        if(collectionName.equals("products")) {
 
-        String name = null;
-        String size;
-        String price;
+            JSONObject ProductJson = null;
+            try {
+                ProductJson = new JSONObject(fieldsJson);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String id = null;
+            String name = null;
+            String size = null;
+            String price = null;
+            boolean onShelf = false;
+            int tierNo = 0;
+            int leftPosition = 0;
+            int noOfColumns = 0;
+            int defaultOrderQuant = 0;
+            int tmpOrderQuant = 0;
 
-        JSONObject jObject;
+            try {
+                id = documentID;
+                name = ProductJson.getString("name");
+                price = ProductJson.getString("price");
+                size = ProductJson.getString("size");
+                defaultOrderQuant = ProductJson.getInt("defaultOrderQuant");
+                JSONObject position = ProductJson.getJSONObject("position");
+                onShelf = position.getBoolean("onShelf");
+                tierNo = position.getInt("tierNo");
+                leftPosition = position.getInt("leftPosition");
+                noOfColumns = position.getInt("noOfCols");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            jObject  = new JSONObject(fieldsJson);
-            name = jObject.getString("name");
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+            product = new Product(id, name, size, price, defaultOrderQuant, tmpOrderQuant, onShelf, tierNo, leftPosition, noOfColumns);
+
+            productList.add(product);
         }
-        TextView tv1 = new TextView(this);
-        tv1.setText(name);
-        setContentView(tv1);
-
-        tv1.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-
-        ((LinearLayout) linearLayout).addView(tv1);*/
 
     }
 

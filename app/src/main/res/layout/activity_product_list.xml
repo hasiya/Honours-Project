@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Rlaout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    tools:context="com.example.rajithhasith.stock_app_android.ProductList">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:src="@drawable/arrow_back"
+        android:id="@+id/button1"/>
+    <RelativeLayout
+        android:id="@+id/listLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent">
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/id_product_list">
+        </ListView>
+    </RelativeLayout>
+
+
+    <ImageButton
+
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:src="@drawable/arrow_forward"
+        android:id="@+id/button2" />
+
+</LinearLayout>

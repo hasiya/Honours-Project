@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rajithhasith.stock_app_android" >
+    package="com.example.rajithhasith.stock_app_android"
+    android:versionCode="1"
+    android:versionName="1.0"  >
 
     <application
         android:allowBackup="true"
@@ -15,6 +17,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ProductList"
+            android:label="@string/title_activity_product_list" >
+        </activity>
+        <activity
+            android:name=".Product_fill"
+            android:label="@string/title_activity_product_fill" >
+        </activity>
+        <activity
+            android:name=".product_tier_slider"
+            android:label="@string/title_activity_product_tier_slider" >
         </activity>
     </application>
 
