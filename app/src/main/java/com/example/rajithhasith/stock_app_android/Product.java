@@ -19,6 +19,10 @@ public class Product implements Parcelable {
     int tierNo;
     int leftPosition;
     int noOfColumns;
+    String imageID;
+    int fillQuantity;
+
+
 
 
     /*ArrayList<Integer> barcodes;
@@ -31,9 +35,10 @@ public class Product implements Parcelable {
         this.barcodes = barcodes;
     }
 
+
 */
 
-    public Product(String id, String name, String size, String price, int defaultOrderQuant, int tmpOrderQuant, boolean onShelf, int tierNo, int leftPosition, int noOfColumns) {
+    public Product(String id, String name, String size, String price, int defaultOrderQuant, int tmpOrderQuant, boolean onShelf, int tierNo, int leftPosition, int noOfColumns, String imageID) {
         this.id = id;
         this.name = name;
         this.size = size;
@@ -44,6 +49,7 @@ public class Product implements Parcelable {
         this.tierNo = tierNo;
         this.leftPosition = leftPosition;
         this.noOfColumns = noOfColumns;
+        this.imageID = imageID;
     }
 
     public Product(Parcel source){
@@ -53,6 +59,11 @@ public class Product implements Parcelable {
         price = source.readString();
         defaultOrderQuant = source.readInt();
         tmpOrderQuant = source.readInt();
+        onShelf = source.readByte() != 0;
+        tierNo = source.readInt();
+        leftPosition = source.readInt();
+        noOfColumns = source.readInt();
+        imageID = source.readString();
     }
 
 
@@ -68,6 +79,11 @@ public class Product implements Parcelable {
         dest.writeString(price);
         dest.writeInt(defaultOrderQuant);
         dest.writeInt(tmpOrderQuant);
+        dest.writeByte((byte)(onShelf ? 1:0));
+        dest.writeInt(tierNo);
+        dest.writeInt(leftPosition);
+        dest.writeInt(noOfColumns);
+        dest.writeString(imageID);
     }
 
 
@@ -121,6 +137,45 @@ public class Product implements Parcelable {
         this.tmpOrderQuant = tmpOrderQuant;
     }
 
+    public int getNoOfColumns() {
+        return noOfColumns;
+    }
+
+    public void setNoOfColumns(int noOfColumns) {
+        this.noOfColumns = noOfColumns;
+    }
+
+    public int getLeftPosition() {
+        return leftPosition;
+    }
+
+    public void setLeftPosition(int leftPosition) {
+        this.leftPosition = leftPosition;
+    }
+
+    public int getTierNo() {
+        return tierNo;
+    }
+
+    public void setTierNo(int tierNo) {
+        this.tierNo = tierNo;
+    }
+
+    public boolean isOnShelf() {
+        return onShelf;
+    }
+
+    public void setOnShelf(boolean onShelf) {
+        this.onShelf = onShelf;
+    }
+
+    public String getImageID() {
+        return imageID;
+    }
+
+    public void setImageID(String imageID) {
+        this.imageID = imageID;
+    }
 
     public static final Creator<Product> CREATOR = new Creator<Product>(){
         public Product createFromParcel(Parcel in){

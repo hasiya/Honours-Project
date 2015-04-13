@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
         {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, ProductList.class);
+                Intent i = new Intent(MainActivity.this, Stock_fill_menu.class);
                 i.putParcelableArrayListExtra("ProductList", productList);
                 startActivity(i);
             }
@@ -114,6 +114,7 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
             String name = null;
             String size = null;
             String price = null;
+            String imageID = null;
             boolean onShelf = false;
             int tierNo = 0;
             int leftPosition = 0;
@@ -126,6 +127,7 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
                 name = ProductJson.getString("name");
                 price = ProductJson.getString("price");
                 size = ProductJson.getString("size");
+                imageID = ProductJson.getString("picture");
                 defaultOrderQuant = ProductJson.getInt("defaultOrderQuant");
                 JSONObject position = ProductJson.getJSONObject("position");
                 onShelf = position.getBoolean("onShelf");
@@ -137,7 +139,7 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
             }
 
 
-            product = new Product(id, name, size, price, defaultOrderQuant, tmpOrderQuant, onShelf, tierNo, leftPosition, noOfColumns);
+            product = new Product(id, name, size, price, defaultOrderQuant, tmpOrderQuant, onShelf, tierNo, leftPosition, noOfColumns, imageID);
 
             productList.add(product);
         }

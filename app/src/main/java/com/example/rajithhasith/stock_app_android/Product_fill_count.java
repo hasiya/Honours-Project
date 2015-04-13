@@ -1,6 +1,7 @@
 package com.example.rajithhasith.stock_app_android;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,13 +11,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import im.delight.android.ddp.Meteor;
 import im.delight.android.ddp.MeteorCallback;
 
 
-public class Product_fill extends ActionBarActivity implements MeteorCallback {
+public class Product_fill_count extends ActionBarActivity implements MeteorCallback {
 
     Meteor mMeteor;
 
@@ -25,32 +31,40 @@ public class Product_fill extends ActionBarActivity implements MeteorCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_fill);
+        setContentView(R.layout.activity_product_fill_count);
 
         mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
         mMeteor.setCallback(this);
 
         product = getIntent().getParcelableExtra("Product");
 
+        ImageView productImage = (ImageView)findViewById(R.id.product_fill_image);
+
+        URL url;
+        Bitmap bmp = null;
+        try {
+            url = new URL("http://placehold.it/65");
+            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        productImage.setImageBitmap(bmp);
+
         TextView productName = (TextView) findViewById(R.id.product_fill_name);
-        productName.setText(product.getName()+" ("+product.getSize()+")");
+        productName.setText("Name: "+product.getName());
+
+        TextView productSize = (TextView) findViewById(R.id.product_fill_size);
+        productSize.setText("Size: "+ product.getSize());
+
+        final TextView productPrice = (TextView) findViewById(R.id.product_fill_price);
+        productPrice.setText("Price: "+ product.getPrice());
+
 
         final EditText updateFillEdit = (EditText)findViewById(R.id.product_fill_number);
+//        updateFillEdit.setText(product.);
 
-        final Button update_btn = (Button) findViewById(R.id.product_fill_update_btn);
-        update_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Object data[];
 
-                //EditText updateFillEdit = (EditText)findViewById(R.id.product_fill_number);
-                int productFillNumber = Integer.parseInt(updateFillEdit.getText().toString());
 
-                data = new Object[]{product.getId(), productFillNumber};
-
-                mMeteor.call("updateProductFill",data);*/
-            }
-        });
 
         updateFillEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -63,15 +77,15 @@ public class Product_fill extends ActionBarActivity implements MeteorCallback {
                 String ns = "s";
 
                 Object data[];
-                int productFillNumber = 0;
+                int productNeedQuant = 0;
                 //EditText updateFillEdit = (EditText)findViewById(R.id.product_fill_number);
                 if(s.toString() != null && !s.toString().isEmpty()) {
                     try{
-                        productFillNumber = Integer.parseInt(s.toString());
+                        productNeedQuant = Integer.parseInt(s.toString());
                     }catch (Exception e){
 //                        productFillNumber = 0L;
                         String newVal = s.toString().substring(0,start);
-                        productFillNumber = Integer.parseInt(newVal);
+                        productNeedQuant = Integer.parseInt(newVal);
                         updateFillEdit.setText(newVal);
                         updateFillEdit.setSelection(updateFillEdit.length());
                     }
@@ -81,9 +95,9 @@ public class Product_fill extends ActionBarActivity implements MeteorCallback {
 
                 }
 
-                data = new Object[]{product.getId(), productFillNumber};
+                data = new Object[]{product.getId(), productNeedQuant};
 
-                mMeteor.call("updateProductFill",data);
+                mMeteor.call("updateProductNeed",data);
             }
 
             @Override

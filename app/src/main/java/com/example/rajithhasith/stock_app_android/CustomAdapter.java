@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +20,7 @@ public class CustomAdapter extends BaseAdapter {
     ArrayList<Product> ProductList;
     private static LayoutInflater inflater=null;
 
-    public CustomAdapter(Activity activity, ArrayList<Product> list) {
+    public CustomAdapter(Activity activity, ArrayList<Product> list,int tierNo) {
 
         ProductList = list;
         context = activity;
@@ -61,13 +59,13 @@ public class CustomAdapter extends BaseAdapter {
         rowView = inflater.inflate(R.layout.list_item,null);
         holder.tv = (TextView)rowView.findViewById(R.id.id_list_text);
 
-        holder.tv.setText(ProductList.get(position).name);
+        holder.tv.setText(ProductList.get(position).name + " ("+ProductList.get(position).getSize()+")");
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(context, Product_fill.class);
+                Intent i = new Intent(context, Product_fill_count.class);
                 i.putExtra("Product", ProductList.get(position));
                 context.startActivity(i);
                // Toast.makeText(context, "You Clicked " + ProductList.get(position).name + "("+ProductList.get(position).id+")", Toast.LENGTH_SHORT).show();

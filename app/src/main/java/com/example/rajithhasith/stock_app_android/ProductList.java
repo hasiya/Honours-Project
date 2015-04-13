@@ -11,6 +11,7 @@ import android.widget.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +24,14 @@ public class ProductList extends ActionBarActivity implements MeteorCallback {
     private Meteor mMeteor;
     Product product;
     Intent i = this.getIntent();
+
     ArrayList<Product> productList;
+    ArrayList<Product> tierProductList;
 
     private ListView ProductListView;
     Context context;
 
+    int TierNo = 1;
 
     public static ArrayList<String> ProductListNames;
 
@@ -41,25 +45,99 @@ public class ProductList extends ActionBarActivity implements MeteorCallback {
             list.add(name);
         }
         return list;
-    };
+    }
+
+    public ArrayList<Product> getTierList(int tierNo, ArrayList<Product> fullProductList){
+        ArrayList<Product> tierList = new ArrayList<>();
+
+        for(int i=0; i < fullProductList.size(); i++){
+            Product tempProduct = fullProductList.get(i);
+
+            if(tempProduct.isOnShelf()){
+                if(tempProduct.getTierNo() == tierNo){
+                    tierList.add(tempProduct);
+                }
+            }
+
+        }
+        return tierList;
 
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
+
+        ImageButton tierListNxt_btn = (ImageButton)findViewById(R.id.tier_list_nxt);
+        ImageButton tierListPrev_btn = (ImageButton)findViewById(R.id.tier_list_prev);
+
         productList = getIntent().getParcelableArrayListExtra("ProductList");
 
-        ProductListNames = getPorductList(productList);
+        if(getIntent().getExtras().containsKey("tireNo")){
+            TierNo = getIntent().getExtras().getInt("tireNo");
+        }
+
+        if(TierNo == 1){
+            tierListPrev_btn.setEnabled(false);
+        }else{
+            tierListPrev_btn.setEnabled(true);
+        }
+
+        if(TierNo == 4){
+            tierListNxt_btn.setEnabled(false);
+        }else{
+            tierListNxt_btn.setEnabled(true);
+        }
+
+        if(TierNo < 1){
+            TierNo = 1;
+        }
+
+        TextView tierText = (TextView) findViewById(R.id.tier_no_txt);
+        tierText.setText("Tier No. " + TierNo);
+
+
+        tierProductList = getTierList(TierNo, productList);
 
         context = this;
 
         ProductListView = (ListView) findViewById(R.id.id_product_list);
-        ProductListView.setAdapter(new CustomAdapter(this, productList));
+        ProductListView.setAdapter(new CustomAdapter(this, tierProductList, TierNo));
 
-        mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
-        mMeteor.setCallback(this);
+        /*mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
+        mMeteor.setCallback(this);*/
+
+
+        tierListNxt_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProductList.this, ProductList.class);
+                i.putParcelableArrayListExtra("ProductList", productList);
+                i.putExtra("tireNo", TierNo+1);
+                startActivity(i);
+            }
+        });
+
+
+        tierListPrev_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProductList.this, ProductList.class);
+                i.putParcelableArrayListExtra("ProductList", productList);
+                i.putExtra("tireNo", TierNo-1);
+                startActivity(i);
+            }
+        });
+
+
     }
 
 

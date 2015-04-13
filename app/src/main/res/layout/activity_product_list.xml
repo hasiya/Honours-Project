@@ -1,33 +1,54 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.rajithhasith.stock_app_android.ProductList"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/tier_no_txt"
+    android:text="Place Holder"
+    android:layout_centerHorizontal="true"
+    android:padding="15dp"
+    android:textSize="23sp" />
+
+<LinearLayout
     android:id="@+id/Rlaout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-    tools:context="com.example.rajithhasith.stock_app_android.ProductList">
+    android:layout_height="fill_parent"
+    android:layout_below="@+id/tier_no_txt">
 
     <ImageButton
+        android:id="@+id/tier_list_prev"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:src="@drawable/arrow_back"
-        android:id="@+id/button1"/>
-    <RelativeLayout
-        android:id="@+id/listLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent">
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/id_product_list">
-        </ListView>
-    </RelativeLayout>
+        android:layout_gravity="start"/>
 
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sdf"
+        android:padding="15dp"
+        android:textSize="23sp"
+        />-->
+
+
+    <ListView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/id_product_list"
+            android:layout_weight="1">
+        </ListView>
 
     <ImageButton
-
+        android:id="@+id/tier_list_nxt"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:src="@drawable/arrow_forward"
-        android:id="@+id/button2" />
+        android:layout_gravity="end"/>
+
 
 </LinearLayout>
+</RelativeLayout>
