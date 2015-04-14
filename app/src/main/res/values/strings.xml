@@ -8,6 +8,7 @@
 
     <string name="fill_menu_count">Stock Filling Count</string>
     <string name="fill_menu_fill_check">Stock Fill Checkout</string>
+    <string name="fill_menu_fill_reset">Stock Count Reset</string>
 
     <string name="action_settings">Settings</string>
 
@@ -18,4 +19,5 @@
     <string name="title_activity_product_tier_tabs">product_tier_tabs</string>
     <string name="title_activity_product_tier_slider">product_tier_slider</string>
     <string name="title_activity_stock_fill_menu">Stock_fill_menu</string>
+    <string name="title_activity_product_fill_check">Product_fill_check</string>
 </resources>

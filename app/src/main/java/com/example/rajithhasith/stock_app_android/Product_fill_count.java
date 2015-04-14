@@ -22,9 +22,9 @@ import im.delight.android.ddp.Meteor;
 import im.delight.android.ddp.MeteorCallback;
 
 
-public class Product_fill_count extends ActionBarActivity implements MeteorCallback {
+public class Product_fill_count extends ActionBarActivity{
 
-    Meteor mMeteor;
+    Meteor mMeteor = MeteorDDP_Connection.mMeteor;
 
     Product product;
 
@@ -33,14 +33,14 @@ public class Product_fill_count extends ActionBarActivity implements MeteorCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_fill_count);
 
-        mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
-        mMeteor.setCallback(this);
 
         product = getIntent().getParcelableExtra("Product");
 
-        ImageView productImage = (ImageView)findViewById(R.id.product_fill_image);
+        TextView imgLoadTxt = (TextView) findViewById(R.id.image_loading_txt);
+        ImageView productImage = (ImageView) findViewById(R.id.product_fill_image);
+        new ImageFromURL(productImage, imgLoadTxt).execute("http://178.62.44.95:3000/cfs/files/images/" + product.getImageID());
 
-        URL url;
+       /* URL url;
         Bitmap bmp = null;
         try {
             url = new URL("http://placehold.it/65");
@@ -48,23 +48,25 @@ public class Product_fill_count extends ActionBarActivity implements MeteorCallb
         } catch (Exception e) {
             e.printStackTrace();
         }
-        productImage.setImageBitmap(bmp);
+        productImage.setImageBitmap(bmp);*/
 
         TextView productName = (TextView) findViewById(R.id.product_fill_name);
-        productName.setText("Name: "+product.getName());
+        productName.setText("Name: " + product.getName());
 
         TextView productSize = (TextView) findViewById(R.id.product_fill_size);
-        productSize.setText("Size: "+ product.getSize());
+        productSize.setText("Size: " + product.getSize());
 
         final TextView productPrice = (TextView) findViewById(R.id.product_fill_price);
-        productPrice.setText("Price: "+ product.getPrice());
+        productPrice.setText("Price: " + product.getPrice());
 
 
-        final EditText updateFillEdit = (EditText)findViewById(R.id.product_fill_number);
-//        updateFillEdit.setText(product.);
-
-
-
+        final EditText updateFillEdit = (EditText) findViewById(R.id.product_fill_number);
+        if (product.getNeedQuant() > 0) {
+            updateFillEdit.setText("" + product.getNeedQuant());
+            updateFillEdit.setSelection(updateFillEdit.length());
+        } else {
+            updateFillEdit.setText("");
+        }
 
         updateFillEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -79,12 +81,12 @@ public class Product_fill_count extends ActionBarActivity implements MeteorCallb
                 Object data[];
                 int productNeedQuant = 0;
                 //EditText updateFillEdit = (EditText)findViewById(R.id.product_fill_number);
-                if(s.toString() != null && !s.toString().isEmpty()) {
-                    try{
+                if (s.toString() != null && !s.toString().isEmpty()) {
+                    try {
                         productNeedQuant = Integer.parseInt(s.toString());
-                    }catch (Exception e){
+                    } catch (Exception e) {
 //                        productFillNumber = 0L;
-                        String newVal = s.toString().substring(0,start);
+                        String newVal = s.toString().substring(0, start);
                         productNeedQuant = Integer.parseInt(newVal);
                         updateFillEdit.setText(newVal);
                         updateFillEdit.setSelection(updateFillEdit.length());
@@ -97,7 +99,7 @@ public class Product_fill_count extends ActionBarActivity implements MeteorCallb
 
                 data = new Object[]{product.getId(), productNeedQuant};
 
-                mMeteor.call("updateProductNeed",data);
+                mMeteor.call("updateProductNeed", data);
             }
 
             @Override
@@ -131,33 +133,4 @@ public class Product_fill_count extends ActionBarActivity implements MeteorCallb
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onConnect() {
-
-    }
-
-    @Override
-    public void onDisconnect(int i, String s) {
-
-    }
-
-    @Override
-    public void onDataAdded(String s, String s2, String s3) {
-
-    }
-
-    @Override
-    public void onDataChanged(String s, String s2, String s3, String s4) {
-
-    }
-
-    @Override
-    public void onDataRemoved(String s, String s2) {
-
-    }
-
-    @Override
-    public void onException(Exception e) {
-
-    }
 }

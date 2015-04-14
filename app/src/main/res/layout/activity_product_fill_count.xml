@@ -18,11 +18,20 @@
 
         <ImageView
             android:id="@+id/product_fill_image"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:scaleType="centerInside"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:id="@+id/image_loading_txt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/placeholder"
-            />
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:paddingTop="100dp"/>
 
         <TextView android:text="Product Name placeholder"
             android:id="@+id/product_fill_name"
@@ -59,7 +68,6 @@
             android:layout_alignParentEnd="true"
             android:gravity="center"
             android:textSize="30sp"
-            android:text="0"
             android:maxLength="3"
             android:layout_below="@+id/product_fill_price"/>
     </RelativeLayout>

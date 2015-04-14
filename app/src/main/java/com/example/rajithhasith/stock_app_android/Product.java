@@ -2,6 +2,7 @@ package com.example.rajithhasith.stock_app_android;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.util.Comparator;
 
 import java.util.ArrayList;
 
@@ -21,24 +22,17 @@ public class Product implements Parcelable {
     int noOfColumns;
     String imageID;
     int fillQuantity;
+    int needQuant;
 
 
 
-
-    /*ArrayList<Integer> barcodes;
-
-    public ArrayList<Integer> getBarcodes() {
-        return barcodes;
-    }
-
-    public void setBarcodes(ArrayList<Integer> barcodes) {
-        this.barcodes = barcodes;
-    }
-
-
-*/
-
-    public Product(String id, String name, String size, String price, int defaultOrderQuant, int tmpOrderQuant, boolean onShelf, int tierNo, int leftPosition, int noOfColumns, String imageID) {
+    public Product(String id, String name, String size,
+                   String price, int defaultOrderQuant,
+                   int tmpOrderQuant, boolean onShelf,
+                   int tierNo, int leftPosition, int noOfColumns,
+                   String imageID,
+                   int fillQuantity, int needQuant)
+    {
         this.id = id;
         this.name = name;
         this.size = size;
@@ -50,6 +44,8 @@ public class Product implements Parcelable {
         this.leftPosition = leftPosition;
         this.noOfColumns = noOfColumns;
         this.imageID = imageID;
+        this.fillQuantity = fillQuantity;
+        this.needQuant = needQuant;
     }
 
     public Product(Parcel source){
@@ -64,6 +60,8 @@ public class Product implements Parcelable {
         leftPosition = source.readInt();
         noOfColumns = source.readInt();
         imageID = source.readString();
+        fillQuantity = source.readInt();
+        needQuant = source.readInt();
     }
 
 
@@ -84,9 +82,21 @@ public class Product implements Parcelable {
         dest.writeInt(leftPosition);
         dest.writeInt(noOfColumns);
         dest.writeString(imageID);
+        dest.writeInt(fillQuantity);
+        dest.writeInt(needQuant);
     }
 
 
+
+    public static Comparator<Product> productLeftPos = new Comparator<Product>() {
+        @Override
+        public int compare(Product lhs, Product rhs) {
+            int product1LeftPos = lhs.getLeftPosition();
+            int product2LeftPos = rhs.getLeftPosition();
+
+            return  product1LeftPos - product2LeftPos;
+        }
+    };
 
 
     public String getId() {
@@ -177,6 +187,22 @@ public class Product implements Parcelable {
         this.imageID = imageID;
     }
 
+    public int getFillQuantity() {
+        return fillQuantity;
+    }
+
+    public void setFillQuantity(int fillQuantity) {
+        this.fillQuantity = fillQuantity;
+    }
+
+    public int getNeedQuant() {
+        return needQuant;
+    }
+
+    public void setNeedQuant(int needQuant) {
+        this.needQuant = needQuant;
+    }
+
     public static final Creator<Product> CREATOR = new Creator<Product>(){
         public Product createFromParcel(Parcel in){
             return new Product(in);
@@ -187,6 +213,4 @@ public class Product implements Parcelable {
         }
 
     };
-
-
 }

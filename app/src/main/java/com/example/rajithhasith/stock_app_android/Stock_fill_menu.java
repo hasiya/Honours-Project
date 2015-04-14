@@ -10,6 +10,8 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+import im.delight.android.ddp.Meteor;
+
 
 public class Stock_fill_menu extends ActionBarActivity {
 
@@ -19,6 +21,8 @@ public class Stock_fill_menu extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_fill_menu);
+
+        final Meteor m =  MeteorDDP_Connection.mMeteor;
 
         productList = getIntent().getParcelableArrayListExtra("ProductList");
 
@@ -34,7 +38,22 @@ public class Stock_fill_menu extends ActionBarActivity {
 
 
 
+        Button coutnReset_btn = (Button)findViewById(R.id.id_stock_fill_reset);
+        coutnReset_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                m.call("resetProductCounts");
+            }
+        });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(Stock_fill_menu.this, MainActivity.class);
+        //i.putParcelableArrayListExtra("ProductList", productList);
+        startActivity(i);
+    }
+
 
 
     @Override

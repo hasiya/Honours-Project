@@ -3,40 +3,26 @@ package com.example.rajithhasith.stock_app_android;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup.*;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import im.delight.android.ddp.Meteor;
-import im.delight.android.ddp.MeteorCallback;
 
 
-public class MainActivity extends ActionBarActivity implements MeteorCallback {
+public class MainActivity extends ActionBarActivity{
 
-    Meteor mMeteor;
+    MeteorDDP_Connection mMeteor;
 
     Product product;
-    ArrayList productList = new ArrayList();
+//    ArrayList<Product> productList = MeteorDDP_Connection.productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
-        mMeteor.setCallback(this);
+        mMeteor = new MeteorDDP_Connection();
 
 
         Button btn_StockFilling = (Button)findViewById(R.id.id_stock_filling);
@@ -45,18 +31,18 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Stock_fill_menu.class);
-                i.putParcelableArrayListExtra("ProductList", productList);
+//                i.putParcelableArrayListExtra("ProductList", productList);
                 startActivity(i);
             }
         });
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mMeteor.disconnect();
-        Log.d("Meteor","disconnected");
+    public void onBackPressed() {
+        System.exit(0);
     }
+
+
 
 
     @Override
@@ -81,6 +67,10 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
         return super.onOptionsItemSelected(item);
     }
 
+
+    {
+
+    /*
     @Override
     public void onConnect() {
         Log.d("Meteor","connected");
@@ -93,6 +83,13 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mMeteor.disconnect();
+        Log.d("Meteor","disconnected");
+    }
+
+    @Override
     public void onDisconnect(int i, String s) {
         System.out.println("Disconnected");
     }
@@ -101,6 +98,7 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
     public void onDataAdded(String collectionName, String documentID, String fieldsJson) {
         System.out.println("Data added to <"+collectionName+"> in document <"+documentID+">");
         System.out.println("    Added: "+fieldsJson);
+
 
         if(collectionName.equals("products")) {
 
@@ -121,6 +119,8 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
             int noOfColumns = 0;
             int defaultOrderQuant = 0;
             int tmpOrderQuant = 0;
+            int fillQuantity = 0;
+            int needQuant = 0;
 
             try {
                 id = documentID;
@@ -134,12 +134,15 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
                 tierNo = position.getInt("tierNo");
                 leftPosition = position.getInt("leftPosition");
                 noOfColumns = position.getInt("noOfCols");
+                fillQuantity = ProductJson.getInt("fillQuant");
+                needQuant = ProductJson.getInt("needQuant");
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
 
-            product = new Product(id, name, size, price, defaultOrderQuant, tmpOrderQuant, onShelf, tierNo, leftPosition, noOfColumns, imageID);
+            product = new Product(id, name, size, price, defaultOrderQuant, tmpOrderQuant, onShelf, tierNo, leftPosition, noOfColumns, imageID, fillQuantity, needQuant);
 
             productList.add(product);
         }
@@ -164,5 +167,6 @@ public class MainActivity extends ActionBarActivity implements MeteorCallback {
         if (e != null) {
             e.printStackTrace();
         }
+    }*/
     }
 }

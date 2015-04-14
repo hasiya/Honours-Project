@@ -14,13 +14,13 @@ import java.util.ArrayList;
 /**
  * Created by Rajith Hasith on 03/04/2015.
  */
-public class CustomAdapter extends BaseAdapter {
+public class ProductListAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<Product> ProductList;
     private static LayoutInflater inflater=null;
 
-    public CustomAdapter(Activity activity, ArrayList<Product> list,int tierNo) {
+    public ProductListAdapter(Activity activity, ArrayList<Product> list, int tierNo) {
 
         ProductList = list;
         context = activity;

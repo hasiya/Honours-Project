@@ -47,6 +47,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button
+            android:id="@+id/id_stock_fill_reset"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fill_menu_fill_reset"
+            android:padding="@dimen/activity_vertical_margin"
+            android:textColor="@android:color/holo_red_dark"
+            style="@android:style/ButtonBar" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="3"></LinearLayout>
 
 </LinearLayout>
