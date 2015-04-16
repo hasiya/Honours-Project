@@ -32,6 +32,7 @@ public class MainActivity extends ActionBarActivity{
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Stock_fill_menu.class);
 //                i.putParcelableArrayListExtra("ProductList", productList);
+                finish();
                 startActivity(i);
             }
         });
@@ -39,7 +40,7 @@ public class MainActivity extends ActionBarActivity{
 
     @Override
     public void onBackPressed() {
-        System.exit(0);
+        finish();
     }
 
 

@@ -50,8 +50,6 @@ public class ProductList extends ActionBarActivity {
 
         }
         return tierList;
-
-
     }
 
 
@@ -105,6 +103,7 @@ public class ProductList extends ActionBarActivity {
                 Intent i = new Intent(ProductList.this, ProductList.class);
                 i.putParcelableArrayListExtra("ProductList", productList);
                 i.putExtra("tireNo", TierNo+1);
+                finish();
                 startActivity(i);
             }
         });
@@ -116,6 +115,7 @@ public class ProductList extends ActionBarActivity {
                 Intent i = new Intent(ProductList.this, ProductList.class);
                 i.putParcelableArrayListExtra("ProductList", productList);
                 i.putExtra("tireNo", TierNo-1);
+                finish();
                 startActivity(i);
             }
         });
@@ -125,6 +125,7 @@ public class ProductList extends ActionBarActivity {
     public void onBackPressed() {
         Intent i = new Intent(ProductList.this, Stock_fill_menu.class);
         i.putParcelableArrayListExtra("ProductList", productList);
+        finish();
         startActivity(i);
     }
 

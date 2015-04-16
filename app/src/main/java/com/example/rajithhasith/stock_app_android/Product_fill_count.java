@@ -1,5 +1,6 @@
 package com.example.rajithhasith.stock_app_android;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
@@ -27,6 +28,7 @@ public class Product_fill_count extends ActionBarActivity{
     Meteor mMeteor = MeteorDDP_Connection.mMeteor;
 
     Product product;
+    int TierNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +37,12 @@ public class Product_fill_count extends ActionBarActivity{
 
 
         product = getIntent().getParcelableExtra("Product");
+        TierNo = getIntent().getExtras().getInt("tireNo");
 
         TextView imgLoadTxt = (TextView) findViewById(R.id.image_loading_txt);
         ImageView productImage = (ImageView) findViewById(R.id.product_fill_image);
         new ImageFromURL(productImage, imgLoadTxt).execute("http://178.62.44.95:3000/cfs/files/images/" + product.getImageID());
 
-       /* URL url;
-        Bitmap bmp = null;
-        try {
-            url = new URL("http://placehold.it/65");
-            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        productImage.setImageBitmap(bmp);*/
 
         TextView productName = (TextView) findViewById(R.id.product_fill_name);
         productName.setText("Name: " + product.getName());
@@ -110,6 +104,13 @@ public class Product_fill_count extends ActionBarActivity{
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(Product_fill_count.this, ProductList.class);
+        i.putExtra("tireNo", TierNo);
+        finish();
+        startActivity(i);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,5 +133,6 @@ public class Product_fill_count extends ActionBarActivity{
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }

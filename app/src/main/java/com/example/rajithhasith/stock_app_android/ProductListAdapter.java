@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -19,11 +21,13 @@ public class ProductListAdapter extends BaseAdapter {
     Context context;
     ArrayList<Product> ProductList;
     private static LayoutInflater inflater=null;
+    int TirtNo;
 
     public ProductListAdapter(Activity activity, ArrayList<Product> list, int tierNo) {
 
         ProductList = list;
         context = activity;
+        TirtNo = tierNo;
 
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,6 +71,8 @@ public class ProductListAdapter extends BaseAdapter {
 
                 Intent i = new Intent(context, Product_fill_count.class);
                 i.putExtra("Product", ProductList.get(position));
+                i.putExtra("tireNo", TirtNo);
+                ((Activity) context).finish();
                 context.startActivity(i);
                // Toast.makeText(context, "You Clicked " + ProductList.get(position).name + "("+ProductList.get(position).id+")", Toast.LENGTH_SHORT).show();
             }

@@ -17,12 +17,15 @@ public class MeteorDDP_Connection implements MeteorCallback {
 
     public static Meteor mMeteor;
 
-    public static ArrayList<Product> productList = new ArrayList<Product>();
+    public static ArrayList<Product> productList;
 
     public MeteorDDP_Connection() {
+        if(mMeteor == null || !mMeteor.isConnected()) {
+            productList = new ArrayList<>();
+            mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
+            mMeteor.setCallback(this);
+        }
 
-        mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
-        mMeteor.setCallback(this);
     }
 
     @Override
@@ -38,8 +41,8 @@ public class MeteorDDP_Connection implements MeteorCallback {
     @Override
     public void onDisconnect(int i, String s) {
         System.out.println("Disconnected");
-        mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
-        mMeteor.setCallback(this);
+        /*mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
+        mMeteor.setCallback(this);*/
     }
 
     @Override

@@ -32,6 +32,7 @@ public class Stock_fill_menu extends ActionBarActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Stock_fill_menu.this, ProductList.class);
                 i.putParcelableArrayListExtra("ProductList", productList);
+                finish();
                 startActivity(i);
             }
         });
@@ -51,6 +52,7 @@ public class Stock_fill_menu extends ActionBarActivity {
     public void onBackPressed() {
         Intent i = new Intent(Stock_fill_menu.this, MainActivity.class);
         //i.putParcelableArrayListExtra("ProductList", productList);
+        finish();
         startActivity(i);
     }
 
