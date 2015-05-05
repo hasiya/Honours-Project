@@ -12,12 +12,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import im.delight.android.ddp.Meteor;
 import im.delight.android.ddp.MeteorCallback;
@@ -26,22 +29,59 @@ import im.delight.android.ddp.MeteorCallback;
 public class Product_fill_count extends ActionBarActivity{
 
     Meteor mMeteor = MeteorDDP_Connection.mMeteor;
+    Functions functions;
 
+    ImageFromURL getImages;
     Product product;
     int TierNo;
+    int TierPos;
+    int TierSize;
+    ArrayList<Product> tierProductList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_fill_count);
 
+        functions = new Functions();
 
         product = getIntent().getParcelableExtra("Product");
-        TierNo = getIntent().getExtras().getInt("tireNo");
+        TierNo = getIntent().getExtras().getInt("tierNo");
+        TierPos = getIntent().getExtras().getInt("tierPos");
+
+        tierProductList = functions.getTierList(TierNo, MeteorDDP_Connection.productList);
+        Collections.sort(tierProductList, Product.productLeftPos);
+
+        ImageButton nxtProduct_btn = (ImageButton)findViewById(R.id.product_nxt);
+        ImageButton prevProduct_btn =(ImageButton)findViewById(R.id.product_prev);
+
+        if(TierNo == 1){
+            if(TierPos == 0){
+                prevProduct_btn.setEnabled(false);
+            }
+            else{
+                prevProduct_btn.setEnabled(true);
+            }
+        }else{
+            prevProduct_btn.setEnabled(true);
+        }
+
+        if(TierNo == 4){
+            if(TierPos == (tierProductList.size()-1)){
+                nxtProduct_btn.setEnabled(false);
+            }
+            else{
+                nxtProduct_btn.setEnabled(true);
+            }
+        }
+        else {
+            nxtProduct_btn.setEnabled(true);
+        }
 
         TextView imgLoadTxt = (TextView) findViewById(R.id.image_loading_txt);
         ImageView productImage = (ImageView) findViewById(R.id.product_fill_image);
-        new ImageFromURL(productImage, imgLoadTxt).execute("http://178.62.44.95:3000/cfs/files/images/" + product.getImageID());
+        getImages = new ImageFromURL(productImage, imgLoadTxt);
+        getImages.execute("http://178.62.44.95:3000/cfs/files/images/" + product.getImageID());
 
 
         TextView productName = (TextView) findViewById(R.id.product_fill_name);
@@ -101,6 +141,54 @@ public class Product_fill_count extends ActionBarActivity{
 
             }
         });
+
+
+
+
+        nxtProduct_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Product_fill_count.this, Product_fill_count.class);
+                if(TierPos < tierProductList.size()-1){
+                    i.putExtra("Product", tierProductList.get(TierPos+1));
+                    i.putExtra("tierNo", TierNo);
+                    i.putExtra("tierPos", TierPos+1);
+                    finish();
+                    startActivity(i);
+                }else{
+                    ArrayList<Product> nxtTierProductList = functions.getTierList(TierNo+1, MeteorDDP_Connection.productList);
+                    Collections.sort(nxtTierProductList, Product.productLeftPos);
+                    i.putExtra("Product", nxtTierProductList.get(0));
+                    i.putExtra("tierNo", TierNo+1);
+                    i.putExtra("tierPos", 0);
+                    finish();
+                    startActivity(i);
+                }
+            }
+        });
+
+        prevProduct_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Product_fill_count.this, Product_fill_count.class);
+                if(TierPos == 0){
+                    ArrayList<Product> prevTierProductList = functions.getTierList(TierNo-1, MeteorDDP_Connection.productList);
+                    Collections.sort(prevTierProductList, Product.productLeftPos);
+                    i.putExtra("Product", prevTierProductList.get(prevTierProductList.size()-1));
+                    i.putExtra("tierNo", TierNo-1);
+                    i.putExtra("tierPos", prevTierProductList.size()-1);
+                    finish();
+                    startActivity(i);
+                }else{
+                    i.putExtra("Product", tierProductList.get(TierPos-1));
+                    i.putExtra("tierNo", TierNo);
+                    i.putExtra("tierPos", TierPos-1);
+                    finish();
+                    startActivity(i);
+                }
+            }
+        });
+
 
     }
 

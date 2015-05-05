@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Stock_App_Android</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">STOCK APP</string>
     <!--Main Menu-->
     <string name="main_stock_filling">Stock Filling</string>
-    <string name="main_product_maintenance">Product Maintenance </string>
+    <string name="main_product_maintenance">Product Maintenance</string>
     <string name="main_ordering">Ordering</string>
 
     <string name="fill_menu_count">Stock Filling Count</string>
@@ -12,12 +12,13 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="title_activity_product_list">ProductList</string>
-    <string name="title_activity_product_fill">Product_fill</string>
+    <string name="title_activity_product_list">Product List</string>
+    <string name="title_activity_product_fill">Stock Fill Count</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_product_tier_tabs">product_tier_tabs</string>
     <string name="title_activity_product_tier_slider">product_tier_slider</string>
-    <string name="title_activity_stock_fill_menu">Stock_fill_menu</string>
+    <string name="title_activity_stock_fill_menu">Stock Filling Menu</string>
     <string name="title_activity_product_fill_check">Product_fill_check</string>
+    <string name="title_activity_check_product_list">CheckProductList</string>
 </resources>

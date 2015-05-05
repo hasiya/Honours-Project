@@ -24,7 +24,7 @@ public class Stock_fill_menu extends ActionBarActivity {
 
         final Meteor m =  MeteorDDP_Connection.mMeteor;
 
-        productList = getIntent().getParcelableArrayListExtra("ProductList");
+        productList = MeteorDDP_Connection.productList;
 
         Button fillCount_btn = (Button)findViewById(R.id.id_stock_fill_count);
         fillCount_btn.setOnClickListener(new View.OnClickListener() {
@@ -37,10 +37,18 @@ public class Stock_fill_menu extends ActionBarActivity {
             }
         });
 
+        Button checkFillCount_btn = (Button)findViewById(R.id.id_stock_fill_check);
+        checkFillCount_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
-        Button coutnReset_btn = (Button)findViewById(R.id.id_stock_fill_reset);
-        coutnReset_btn.setOnClickListener(new View.OnClickListener() {
+
+        Button countReset_btn = (Button)findViewById(R.id.id_stock_fill_reset);
+        countReset_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 m.call("resetProductCounts");

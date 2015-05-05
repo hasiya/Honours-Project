@@ -18,9 +18,9 @@ import java.util.ArrayList;
  */
 public class ProductListAdapter extends BaseAdapter {
 
+    private static LayoutInflater inflater=null;
     Context context;
     ArrayList<Product> ProductList;
-    private static LayoutInflater inflater=null;
     int TirtNo;
 
     public ProductListAdapter(Activity activity, ArrayList<Product> list, int tierNo) {
@@ -49,10 +49,6 @@ public class ProductListAdapter extends BaseAdapter {
         return position;
     }
 
-    public class Holder {
-        TextView tv;
-    }
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -71,7 +67,9 @@ public class ProductListAdapter extends BaseAdapter {
 
                 Intent i = new Intent(context, Product_fill_count.class);
                 i.putExtra("Product", ProductList.get(position));
-                i.putExtra("tireNo", TirtNo);
+                i.putExtra("tierNo", TirtNo);
+                i.putExtra("tierPos", position);
+                i.putExtra("tierSize", getCount());
                 ((Activity) context).finish();
                 context.startActivity(i);
                // Toast.makeText(context, "You Clicked " + ProductList.get(position).name + "("+ProductList.get(position).id+")", Toast.LENGTH_SHORT).show();
@@ -79,5 +77,9 @@ public class ProductListAdapter extends BaseAdapter {
         });
 
         return rowView;
+    }
+
+    public class Holder {
+        TextView tv;
     }
 }

@@ -22,7 +22,9 @@ public class MeteorDDP_Connection implements MeteorCallback {
     public MeteorDDP_Connection() {
         if(mMeteor == null || !mMeteor.isConnected()) {
             productList = new ArrayList<>();
+
             mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
+
             mMeteor.setCallback(this);
         }
 
@@ -131,76 +133,69 @@ public class MeteorDDP_Connection implements MeteorCallback {
 
     public void updateProductList(String documentID, String updatedValuesJson){
         JSONObject updatedJson = null;
-
         try {
             updatedJson = new JSONObject(updatedValuesJson);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         for (int i=0; i<productList.size(); i++) {
-
             assert updatedJson != null;
             if(productList.get(i).getId().equals(documentID)){
                 if (updatedJson.has("needQuant")) {
-
                     try {
                          int newNeedQuant = updatedJson.getInt("needQuant");
                         productList.get(i).setNeedQuant(newNeedQuant);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
                 else if (updatedJson.has("name")) {
-
                     try {
                         String newName = updatedJson.getString("name");
                         productList.get(i).setName(newName);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
                 else if (updatedJson.has("size")) {
-
                     try {
                         String newSize = updatedJson.getString("size");
                         productList.get(i).setSize(newSize);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
                 else if (updatedJson.has("price")) {
-
                     try {
                         String newPrice = updatedJson.getString("price");
                         productList.get(i).setPrice(newPrice);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
                 else if (updatedJson.has("defaultOrderQuant")) {
-
                     try {
                         int newDefOrderQuant = updatedJson.getInt("defaultOrderQuant");
                         productList.get(i).setDefaultOrderQuant(newDefOrderQuant);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
                 else if (updatedJson.has("tmpOrderQuant")) {
-
                     try {
-                        int newTmpOrderQuant = updatedJson.getInt("defaultOrderQuant");
+                        int newTmpOrderQuant = updatedJson.getInt("tmpOrderQuant");
                         productList.get(i).setTmpOrderQuant(newTmpOrderQuant);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
+                }
+                else if (updatedJson.has("fillQuant")) {
+                    try {
+                        int newFillQuantity = updatedJson.getInt("fillQuant");
+                        productList.get(i).setFillQuantity(newFillQuantity);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 

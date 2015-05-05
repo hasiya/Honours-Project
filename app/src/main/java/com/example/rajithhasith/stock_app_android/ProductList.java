@@ -23,6 +23,8 @@ import im.delight.android.ddp.MeteorCallback;
 
 public class ProductList extends ActionBarActivity {
 
+    Functions functions;
+
     Product product;
     Intent i = this.getIntent();
 
@@ -36,27 +38,15 @@ public class ProductList extends ActionBarActivity {
 
 
 
-    public ArrayList<Product> getTierList(int tierNo, ArrayList<Product> fullProductList){
-        ArrayList<Product> tierList = new ArrayList<>();
 
-        for(int i=0; i < fullProductList.size(); i++){
-            Product tempProduct = fullProductList.get(i);
-
-            if(tempProduct.isOnShelf()){
-                if(tempProduct.getTierNo() == tierNo){
-                    tierList.add(tempProduct);
-                }
-            }
-
-        }
-        return tierList;
-    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
+
+        functions = new Functions();
 
         ImageButton tierListNxt_btn = (ImageButton)findViewById(R.id.tier_list_nxt);
         ImageButton tierListPrev_btn = (ImageButton)findViewById(R.id.tier_list_prev);
@@ -87,7 +77,7 @@ public class ProductList extends ActionBarActivity {
         tierText.setText("Tier No. " + TierNo);
 
 
-        tierProductList = getTierList(TierNo, productList);
+        tierProductList = functions.getTierList(TierNo, productList);
         Collections.sort(tierProductList, Product.productLeftPos);
 
         context = this;
