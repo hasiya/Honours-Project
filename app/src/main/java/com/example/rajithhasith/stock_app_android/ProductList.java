@@ -28,7 +28,7 @@ public class ProductList extends ActionBarActivity {
     Product product;
     Intent i = this.getIntent();
 
-    ArrayList<Product> productList;
+   // ArrayList<Product> productList;
     ArrayList<Product> tierProductList;
 
     private ListView ProductListView;
@@ -51,7 +51,7 @@ public class ProductList extends ActionBarActivity {
         ImageButton tierListNxt_btn = (ImageButton)findViewById(R.id.tier_list_nxt);
         ImageButton tierListPrev_btn = (ImageButton)findViewById(R.id.tier_list_prev);
 
-        productList = MeteorDDP_Connection.productList;
+        //productList = MeteorDDP_Connection.productList;
 
         if(getIntent().getExtras().containsKey("tireNo")){
             TierNo = getIntent().getExtras().getInt("tireNo");
@@ -77,7 +77,7 @@ public class ProductList extends ActionBarActivity {
         tierText.setText("Tier No. " + TierNo);
 
 
-        tierProductList = functions.getTierList(TierNo, productList);
+        tierProductList = functions.getTierList(TierNo, MeteorDDP_Connection.productList);
         Collections.sort(tierProductList, Product.productLeftPos);
 
         context = this;
@@ -91,7 +91,7 @@ public class ProductList extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ProductList.this, ProductList.class);
-                i.putParcelableArrayListExtra("ProductList", productList);
+                i.putParcelableArrayListExtra("ProductList", MeteorDDP_Connection.productList);
                 i.putExtra("tireNo", TierNo+1);
                 finish();
                 startActivity(i);
@@ -103,7 +103,7 @@ public class ProductList extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ProductList.this, ProductList.class);
-                i.putParcelableArrayListExtra("ProductList", productList);
+                i.putParcelableArrayListExtra("ProductList", MeteorDDP_Connection.productList);
                 i.putExtra("tireNo", TierNo-1);
                 finish();
                 startActivity(i);
@@ -114,7 +114,7 @@ public class ProductList extends ActionBarActivity {
     @Override
     public void onBackPressed() {
         Intent i = new Intent(ProductList.this, Stock_fill_menu.class);
-        i.putParcelableArrayListExtra("ProductList", productList);
+        i.putParcelableArrayListExtra("ProductList", MeteorDDP_Connection.productList);
         finish();
         startActivity(i);
     }

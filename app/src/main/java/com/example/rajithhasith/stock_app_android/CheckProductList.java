@@ -5,13 +5,25 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 
 public class CheckProductList extends ActionBarActivity {
+
+    Functions functions;
+    ArrayList<Product> checkProductsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_product_list);
+
+        functions = new Functions();
+
+        checkProductsList = functions.getFillProductsList();
+
+
+
     }
 
 

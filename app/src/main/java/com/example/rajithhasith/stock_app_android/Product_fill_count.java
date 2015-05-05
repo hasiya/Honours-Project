@@ -94,7 +94,7 @@ public class Product_fill_count extends ActionBarActivity{
         productPrice.setText("Price: " + product.getPrice());
 
 
-        final EditText updateFillEdit = (EditText) findViewById(R.id.product_fill_number);
+        final EditText updateFillEdit = (EditText) findViewById(R.id.product_need_number);
         if (product.getNeedQuant() > 0) {
             updateFillEdit.setText("" + product.getNeedQuant());
             updateFillEdit.setSelection(updateFillEdit.length());

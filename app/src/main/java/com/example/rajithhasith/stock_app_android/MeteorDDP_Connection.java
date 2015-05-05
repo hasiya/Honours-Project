@@ -8,6 +8,7 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.Policy;
 import java.util.ArrayList;
 
 import im.delight.android.ddp.Meteor;
@@ -119,6 +120,12 @@ public class MeteorDDP_Connection implements MeteorCallback {
     @Override
     public void onDataRemoved(String collectionName, String documentID) {
         System.out.println("Data removed from <"+collectionName+"> in document <"+documentID+">");
+
+        for(Product p:productList){
+            if(p.getId() ==  documentID){
+               productList.remove(p);
+            }
+        }
     }
 
     @Override
@@ -194,6 +201,22 @@ public class MeteorDDP_Connection implements MeteorCallback {
                         int newFillQuantity = updatedJson.getInt("fillQuant");
                         productList.get(i).setFillQuantity(newFillQuantity);
                     } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if(updatedJson.has("position")){
+                    try {
+                        JSONObject ProductPositionJson = updatedJson.getJSONObject("position");
+                        Boolean onShelf = ProductPositionJson.getBoolean("onShelf");
+                        int tierNo = ProductPositionJson.getInt("tierNo");
+                        int leftPos = ProductPositionJson.getInt("leftPosition");
+                        int noOfCol = ProductPositionJson.getInt("noOfCols");
+
+                        productList.get(i).setOnShelf(onShelf);
+                        productList.get(i).setTierNo(tierNo);
+                        productList.get(i).setLeftPosition(leftPos);
+                        productList.get(i).setNoOfColumns(noOfCol);
+                    }catch (JSONException e){
                         e.printStackTrace();
                     }
                 }

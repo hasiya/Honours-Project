@@ -62,7 +62,7 @@
 
         <EditText
             android:layout_width="70dp"
-            android:id="@+id/product_fill_number"
+            android:id="@+id/product_need_number"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:layout_alignParentEnd="true"
