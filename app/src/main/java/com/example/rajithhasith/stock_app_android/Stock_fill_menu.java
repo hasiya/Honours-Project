@@ -1,5 +1,6 @@
 package com.example.rajithhasith.stock_app_android;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,7 +43,9 @@ public class Stock_fill_menu extends ActionBarActivity {
         checkFillCount_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(Stock_fill_menu.this, CheckProductList.class);
+                finish();
+                startActivity(i);
             }
         });
 
@@ -52,6 +56,10 @@ public class Stock_fill_menu extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 m.call("resetProductCounts");
+
+                Context context = getApplicationContext();
+                CharSequence msg = "Product Filling Counts are Reseted!";
+                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
             }
         });
     }

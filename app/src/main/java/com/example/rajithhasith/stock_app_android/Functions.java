@@ -28,8 +28,8 @@ public class Functions {
 
     public ArrayList<Product> getFillProductsList(){
 
-        ArrayList<Product> tmpNeedList = null;
-        ArrayList<Product> needProductList = null;
+        ArrayList<Product> tmpNeedList = new ArrayList<>();
+        ArrayList<Product> needProductList;
 
         for (Product p:MeteorDDP_Connection.productList){
             if(p.getNeedQuant()>0){
@@ -41,19 +41,16 @@ public class Functions {
     }
 
     public ArrayList<Product> sortCheckProductList(ArrayList<Product> list){
-        ArrayList<Product> tmpList = null;
-        ArrayList<Product> sortedList = null;
+
+        ArrayList<Product> sortedList = new ArrayList<>();
 
         for(int i=1; i<5; i++){
             for (Product p:list){
                 if(p.getTierNo() == i){
-                    tmpList.add(p);
+                    sortedList.add(p);
                 }
             }
-            Collections.sort(tmpList, Product.productLeftPos);
-            for (Product p:tmpList){
-                sortedList.add(p);
-            }
+            Collections.sort(sortedList, Product.productLeftPos);
         }
         return sortedList;
     }

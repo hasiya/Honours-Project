@@ -55,53 +55,67 @@ public class MeteorDDP_Connection implements MeteorCallback {
 
 
         if(collectionName.equals("products")) {
+            Boolean isInList = false;
 
-            JSONObject ProductJson = null;
-            try {
-                ProductJson = new JSONObject(fieldsJson);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            String id = null;
-            String name = null;
-            String size = null;
-            String price = null;
-            String imageID = null;
-            boolean onShelf = false;
-            int tierNo = 0;
-            int leftPosition = 0;
-            int noOfColumns = 0;
-            int defaultOrderQuant = 0;
-            int tmpOrderQuant = 0;
-            int fillQuantity = 0;
-            int needQuant = 0;
-
-            try {
-                id = documentID;
-                assert ProductJson != null;
-                name = ProductJson.getString("name");
-                price = ProductJson.getString("price");
-                size = ProductJson.getString("size");
-                imageID = ProductJson.getString("picture");
-                defaultOrderQuant = ProductJson.getInt("defaultOrderQuant");
-                JSONObject position = ProductJson.getJSONObject("position");
-                onShelf = position.getBoolean("onShelf");
-                tierNo = position.getInt("tierNo");
-                leftPosition = position.getInt("leftPosition");
-                noOfColumns = position.getInt("noOfCols");
-                fillQuantity = ProductJson.getInt("fillQuant");
-                needQuant = ProductJson.getInt("needQuant");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
+            if(!productList.isEmpty()) {
+                for (Product p : productList) {
+                    if (p.getId() == documentID) {
+                        isInList = true;
+                    } else {
+                        isInList = false;
+                    }
+                }
             }
 
-            Product product = new Product(id, name, size, price,
-                    defaultOrderQuant, tmpOrderQuant, onShelf,
-                    tierNo, leftPosition, noOfColumns, imageID,
-                    fillQuantity, needQuant);
+            if(!isInList) {
 
-            productList.add(product);
+                JSONObject ProductJson = null;
+                try {
+                    ProductJson = new JSONObject(fieldsJson);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String id = null;
+                String name = null;
+                String size = null;
+                String price = null;
+                String imageID = null;
+                boolean onShelf = false;
+                int tierNo = 0;
+                int leftPosition = 0;
+                int noOfColumns = 0;
+                int defaultOrderQuant = 0;
+                int tmpOrderQuant = 0;
+                int fillQuantity = 0;
+                int needQuant = 0;
+
+                try {
+                    id = documentID;
+                    assert ProductJson != null;
+                    name = ProductJson.getString("name");
+                    price = ProductJson.getString("price");
+                    size = ProductJson.getString("size");
+                    imageID = ProductJson.getString("picture");
+                    defaultOrderQuant = ProductJson.getInt("defaultOrderQuant");
+                    JSONObject position = ProductJson.getJSONObject("position");
+                    onShelf = position.getBoolean("onShelf");
+                    tierNo = position.getInt("tierNo");
+                    leftPosition = position.getInt("leftPosition");
+                    noOfColumns = position.getInt("noOfCols");
+                    fillQuantity = ProductJson.getInt("fillQuant");
+                    needQuant = ProductJson.getInt("needQuant");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Product product = new Product(id, name, size, price,
+                        defaultOrderQuant, tmpOrderQuant, onShelf,
+                        tierNo, leftPosition, noOfColumns, imageID,
+                        fillQuantity, needQuant);
+
+                productList.add(product);
+            }
         }
 
     }

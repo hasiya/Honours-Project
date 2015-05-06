@@ -71,6 +71,16 @@
             android:textSize="30sp"
             android:maxLength="3"
             android:layout_below="@+id/product_fill_price"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/need_quantity"
+            android:padding="15dp"
+            android:textSize="23sp"
+            android:layout_below="@+id/product_fill_price"
+            android:layout_toStartOf="@id/product_need_number"
+            android:layout_toLeftOf="@id/product_need_number"/>
     </RelativeLayout>
     <ImageButton
         android:layout_width="wrap_content"

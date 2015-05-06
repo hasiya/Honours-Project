@@ -4,14 +4,6 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tier_no_txt"
-        android:text="Place Holder"
-        android:layout_centerHorizontal="true"
-        android:padding="15dp"
-        android:textSize="23sp" />
 
     <LinearLayout
         android:id="@+id/Rlaout"
@@ -37,7 +29,7 @@
         <ListView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:id="@+id/id_product_list"
+            android:id="@+id/id_product_check_list"
             android:layout_weight="1">
         </ListView>
 

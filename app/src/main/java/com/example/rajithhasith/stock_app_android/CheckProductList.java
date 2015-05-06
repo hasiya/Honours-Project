@@ -1,9 +1,11 @@
 package com.example.rajithhasith.stock_app_android;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -12,6 +14,8 @@ public class CheckProductList extends ActionBarActivity {
 
     Functions functions;
     ArrayList<Product> checkProductsList;
+
+    private ListView CheckoutListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +26,20 @@ public class CheckProductList extends ActionBarActivity {
 
         checkProductsList = functions.getFillProductsList();
 
+        CheckoutListView = (ListView)findViewById(R.id.id_product_check_list);
+        CheckoutListView.setAdapter(new ProductCheckListAdapter(this,checkProductsList));
 
 
+
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(CheckProductList.this, Stock_fill_menu.class);
+        finish();
+        startActivity(i);
     }
 
 

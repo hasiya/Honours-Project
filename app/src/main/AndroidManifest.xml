@@ -41,11 +41,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Product_fill_check"
-            android:label="@string/title_activity_product_fill_check"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".CheckProductList"
             android:label="@string/title_activity_check_product_list"
             android:screenOrientation="portrait" >

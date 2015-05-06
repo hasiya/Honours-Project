@@ -3,7 +3,22 @@
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
-
+    <ImageView
+        android:id="@+id/product_check_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerInside"
+        android:paddingTop="20dp"
+        />
+    <!--<TextView
+        android:id="@+id/image_loading_txt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:paddingTop="100dp"/>-->
 
     <TextView
         android:id="@+id/check_list_name_txt"
@@ -11,7 +26,9 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:textStyle="bold"
-        android:textSize="23sp"/>
+        android:textSize="23sp"
+        android:layout_toEndOf="@id/product_check_image"
+        android:layout_toRightOf="@id/product_check_image"/>
 
     <CheckBox
         android:id="@+id/fill_check"
@@ -51,14 +68,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/need_quantity"
+        android:text="@string/fill_quantity"
         android:padding="15dp"
         android:textSize="23sp"
         android:layout_below="@+id/check_list_name_txt"
         android:layout_toStartOf="@id/product_fill_number"
         android:layout_toLeftOf="@id/product_fill_number"/>
 
-
+    <TextView
+        android:id="@+id/product_check_image_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
 
 

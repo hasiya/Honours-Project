@@ -20,7 +20,7 @@
     <string name="title_activity_product_tier_slider">product_tier_slider</string>
     <string name="title_activity_stock_fill_menu">Stock Filling Menu</string>
     <string name="title_activity_product_fill_check">Product_fill_check</string>
-    <string name="title_activity_check_product_list">CheckProductList</string>
+    <string name="title_activity_check_product_list">Product Checkout List</string>
     
     <string name="fill_quantity">Product Fill Quantity</string>
     <string name="need_quantity">Product Need Quantity</string>
