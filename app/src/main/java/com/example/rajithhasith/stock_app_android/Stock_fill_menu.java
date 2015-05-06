@@ -17,14 +17,17 @@ import im.delight.android.ddp.Meteor;
 
 public class Stock_fill_menu extends ActionBarActivity {
 
+    MeteorDDP_Connection mMeteorCon;
     ArrayList<Product> productList;
+    Meteor mMeteor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_fill_menu);
 
-        final Meteor m =  MeteorDDP_Connection.mMeteor;
+        mMeteorCon = new MeteorDDP_Connection();
+        mMeteor = MeteorDDP_Connection.mMeteor;
 
         productList = MeteorDDP_Connection.productList;
 
@@ -55,7 +58,7 @@ public class Stock_fill_menu extends ActionBarActivity {
         countReset_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                m.call("resetProductCounts");
+                mMeteor.call("resetProductCounts");
 
                 Context context = getApplicationContext();
                 CharSequence msg = "Product Filling Counts are Reseted!";
@@ -66,10 +69,10 @@ public class Stock_fill_menu extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(Stock_fill_menu.this, MainActivity.class);
+//        Intent i = new Intent(Stock_fill_menu.this, MainActivity.class);
         //i.putParcelableArrayListExtra("ProductList", productList);
         finish();
-        startActivity(i);
+//        startActivity(i);
     }
 
 
