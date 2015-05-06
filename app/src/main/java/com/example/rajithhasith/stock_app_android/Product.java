@@ -23,6 +23,7 @@ public class Product implements Parcelable {
     String imageID;
     int fillQuantity;
     int needQuant;
+    boolean order;
 
 
 
@@ -31,7 +32,7 @@ public class Product implements Parcelable {
                    int tmpOrderQuant, boolean onShelf,
                    int tierNo, int leftPosition, int noOfColumns,
                    String imageID,
-                   int fillQuantity, int needQuant)
+                   int fillQuantity, int needQuant,boolean order)
     {
         this.id = id;
         this.name = name;
@@ -46,6 +47,7 @@ public class Product implements Parcelable {
         this.imageID = imageID;
         this.fillQuantity = fillQuantity;
         this.needQuant = needQuant;
+        this.order = order;
     }
 
     public Product(Parcel source){
@@ -62,6 +64,7 @@ public class Product implements Parcelable {
         imageID = source.readString();
         fillQuantity = source.readInt();
         needQuant = source.readInt();
+        order = source.readByte() != 0;
     }
 
 
@@ -84,6 +87,7 @@ public class Product implements Parcelable {
         dest.writeString(imageID);
         dest.writeInt(fillQuantity);
         dest.writeInt(needQuant);
+        dest.writeByte((byte)(order ? 1:0));
     }
 
 
@@ -201,6 +205,14 @@ public class Product implements Parcelable {
 
     public void setNeedQuant(int needQuant) {
         this.needQuant = needQuant;
+    }
+
+    public boolean isOrder() {
+        return order;
+    }
+
+    public void setOrder(boolean order) {
+        this.order = order;
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>(){

@@ -65,6 +65,7 @@ public class ProductCheckListAdapter extends BaseAdapter {
         holder.tv_needCount = (TextView)itemView.findViewById(R.id.need_quantity_txt);
         holder.checkBox = (CheckBox)itemView.findViewById(R.id.fill_check);
         holder.et_fillCount = (EditText)itemView.findViewById(R.id.product_fill_number);
+        holder.order_check = (CheckBox)itemView.findViewById(R.id.Order_check);
 
         holder.tv_imgLrd = (TextView) itemView.findViewById(R.id.product_check_image_load);
 
@@ -79,6 +80,21 @@ public class ProductCheckListAdapter extends BaseAdapter {
         }else {
             holder.et_fillCount.setText("");
         }
+
+
+        if(CheckList.get(position).isOrder()){
+            holder.order_check.setChecked(true);
+        }else{
+            holder.order_check.setChecked(false);
+        }
+
+
+        if(CheckList.get(position).getNeedQuant() <= CheckList.get(position).getFillQuantity()){
+            holder.checkBox.setChecked(true);
+        }else{
+            holder.checkBox.setChecked(false);
+        }
+
 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -133,6 +149,16 @@ public class ProductCheckListAdapter extends BaseAdapter {
             }
         });
 
+        holder.order_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Object data[] = new Object[]{CheckList.get(position).getId(), isChecked};
+                mMeteor.call("setOrderCheck",data);
+            }
+        });
+
+
+
 
         return itemView;
     }
@@ -144,5 +170,6 @@ public class ProductCheckListAdapter extends BaseAdapter {
         CheckBox checkBox;
         EditText et_fillCount;
         TextView tv_imgLrd;
+        CheckBox order_check;
     }
 }

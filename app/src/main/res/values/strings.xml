@@ -23,6 +23,7 @@
     <string name="title_activity_check_product_list">Product Checkout List</string>
     
     <string name="fill_quantity">Product Fill Quantity</string>
+    <string name="order_check">Order</string>
     <string name="need_quantity">Product Need Quantity</string>
 
     <string name="product_checkout_lable">Product Checkout List</string>

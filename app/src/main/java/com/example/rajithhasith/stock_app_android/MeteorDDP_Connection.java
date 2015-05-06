@@ -88,6 +88,7 @@ public class MeteorDDP_Connection implements MeteorCallback {
                 int tmpOrderQuant = 0;
                 int fillQuantity = 0;
                 int needQuant = 0;
+                boolean order = false;
 
                 try {
                     id = documentID;
@@ -104,6 +105,7 @@ public class MeteorDDP_Connection implements MeteorCallback {
                     noOfColumns = position.getInt("noOfCols");
                     fillQuantity = ProductJson.getInt("fillQuant");
                     needQuant = ProductJson.getInt("needQuant");
+                    order = position.getBoolean("Order");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -112,7 +114,7 @@ public class MeteorDDP_Connection implements MeteorCallback {
                 Product product = new Product(id, name, size, price,
                         defaultOrderQuant, tmpOrderQuant, onShelf,
                         tierNo, leftPosition, noOfColumns, imageID,
-                        fillQuantity, needQuant);
+                        fillQuantity, needQuant,order);
 
                 productList.add(product);
             }
@@ -214,6 +216,14 @@ public class MeteorDDP_Connection implements MeteorCallback {
                     try {
                         int newFillQuantity = updatedJson.getInt("fillQuant");
                         productList.get(i).setFillQuantity(newFillQuantity);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if (updatedJson.has("Order")) {
+                    try {
+                        boolean newIsOrder = updatedJson.getBoolean("Order");
+                        productList.get(i).setOrder(newIsOrder);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
