@@ -24,7 +24,7 @@ public class MeteorDDP_Connection implements MeteorCallback {
         if(mMeteor == null || !mMeteor.isConnected()) {
             productList = new ArrayList<>();
 
-            mMeteor = new Meteor("ws://178.62.44.95:3000/websocket");
+            mMeteor = new Meteor("ws://178.62.29.188:3000/websocket");
 
             mMeteor.setCallback(this);
         }

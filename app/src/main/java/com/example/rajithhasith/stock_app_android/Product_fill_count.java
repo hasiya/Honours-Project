@@ -81,7 +81,7 @@ public class Product_fill_count extends ActionBarActivity{
         TextView imgLoadTxt = (TextView) findViewById(R.id.image_loading_txt);
         ImageView productImage = (ImageView) findViewById(R.id.product_fill_image);
         getImages = new ImageFromURL(productImage, imgLoadTxt);
-        getImages.execute("http://178.62.44.95:3000/cfs/files/images/" + product.getImageID());
+        getImages.execute("http://178.62.29.188:3000/cfs/files/images/" + product.getImageID());
 
 
         TextView productName = (TextView) findViewById(R.id.product_fill_name);

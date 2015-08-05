@@ -70,7 +70,7 @@ public class ProductCheckListAdapter extends BaseAdapter {
         holder.tv_imgLrd = (TextView) itemView.findViewById(R.id.product_check_image_load);
 
         ImageFromURL getImages = new ImageFromURL(holder.iv_image, holder.tv_imgLrd);
-        getImages.execute("http://178.62.44.95:3000/cfs/files/images/" + CheckList.get(position).getImageID());
+        getImages.execute("http://178.62.29.188:3000/cfs/files/images/" + CheckList.get(position).getImageID());
         holder.tv_name.setText(CheckList.get(position).getName()+"("+CheckList.get(position).getSize()+")");
         holder.tv_needCount.setText(""+CheckList.get(position).getNeedQuant());
         /********Checkbox controls goes here*******/
